@@ -16,7 +16,7 @@ async def start(c, m):
     mention = f"[{m.from_user.first_name}{last_name}](tg://user?id={m.from_user.id})" if m.from_user.first_name else f"[User](tg://user?id={m.from_user.id})"
     # Reaction only for commands, not callbacks
     if getattr(m, "text", None):
-        random_emoji = random.choice(TEXT.EMOJI_LIST)
+        random_emoji = random.sample(TEXT.EMOJI_LIST, 2)
         try:
             await c.send_reaction(
                 chat_id=m.chat.id,
@@ -26,7 +26,7 @@ async def start(c, m):
             )
         except AttributeError:
             pass 
-    asyncio.sleep(0.5)        
+    await asyncio.sleep(1)        
     msg = m.message if getattr(m, "data", None) else await m.reply("**Processing....⌛**", quote=True)
     try:
         buttons = [
@@ -64,7 +64,7 @@ async def help_handler(client: Bot, message: Message | CallbackQuery):
             )
         except AttributeError:
             pass 
-    asyncio.sleep(0.5)
+    await asyncio.sleep(1)
     msg = message.message if getattr(message, "data", None) else await message.reply("**Processing....⌛**", quote=True)
     try:
         buttons = [
@@ -106,7 +106,7 @@ async def about(client: Bot, message: Message | CallbackQuery):
             )
         except AttributeError:
             pass 
-    asyncio.sleep(0.5)
+    await asyncio.sleep(1)
     try:
         msg = message.message if getattr(message, "data", None) else await message.reply("**Processing....⌛**", quote=True)
         me = await client.get_me()
