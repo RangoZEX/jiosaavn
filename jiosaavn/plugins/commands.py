@@ -16,7 +16,7 @@ async def start(c, m):
     mention = f"[{m.from_user.first_name}{last_name}](tg://user?id={m.from_user.id})" if m.from_user.first_name else f"[User](tg://user?id={m.from_user.id})"
     # Reaction only for commands, not callbacks
     if getattr(m, "text", None):
-        random_emoji = random.sample(TEXT.EMOJI_LIST, 2)
+        random_emoji = random.choice(TEXT.EMOJI_LIST)
         try:
             await c.send_reaction(
                 chat_id=m.chat.id,
